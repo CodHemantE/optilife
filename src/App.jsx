@@ -6,6 +6,7 @@ import HeroSection from './components/HeroSection'
 import DashboardSection from './components/DashboardSection'
 import HabitsSection from './components/HabitsSection'
 import InsightsSection from './components/InsightsSection'
+import AIAssistant from './components/AIAssistant'
 import CTASection from './components/CTASection'
 import Footer from './components/Footer'
 
@@ -40,6 +41,7 @@ export default function App() {
         <DashboardSection />
         <HabitsSection />
         <InsightsSection />
+        <AIAssistant />
         <CTASection />
       </main>
       <Footer />
