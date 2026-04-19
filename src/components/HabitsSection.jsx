@@ -1,33 +1,33 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Check, Calendar, Activity, Pill } from 'lucide-react'
+import { Check, Clock } from 'lucide-react'
 
-// Telemedicine/Health Care Plans (replacing Habits)
-const defaultPlans = [
-  { id: 1, text: 'Take Morning Medication', category: 'medication', done: true, streak: 12 },
-  { id: 2, text: '30-Minute Checkin Walk', category: 'activity', done: false, streak: 3 },
-  { id: 3, text: 'Log Blood Pressure', category: 'vitals', done: false, streak: 5 },
+// Office Habits
+const defaultHabits = [
+  { id: 1, text: 'Take a 5-min walk away from desk', time: '10:00 AM', done: true },
+  { id: 2, text: 'Hydration check (Drink water)', time: '12:00 PM', done: false },
+  { id: 3, text: '20-20-20 rule for eyes', time: '2:00 PM', done: false },
 ]
 
 export default function HabitsSection() {
-  const [plans, setPlans] = useState(defaultPlans)
+  const [habits, setHabits] = useState(defaultHabits)
 
-  const toggle = (id) => setPlans(plans.map(p => p.id === id ? { ...p, done: !p.done } : p))
+  const toggle = (id) => setHabits(habits.map(h => h.id === id ? { ...h, done: !h.done } : h))
 
   return (
-    <section id="habits" className="section">
-      <div className="container" style={{ maxWidth: 800 }}>
+    <section id="daily" className="section">
+      <div className="container" style={{ maxWidth: 700 }}>
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
-           <span className="badge badge-purple" style={{ marginBottom: 'var(--space-3)' }}>TREATMENT PLAN</span>
-           <h2 className="display-lg">Daily <span style={{ color: 'var(--primary-600)' }}>Adherence</span></h2>
+           <span className="badge badge-purple" style={{ marginBottom: 'var(--space-3)' }}>DAILY CHECKLIST</span>
+           <h2 className="display-lg">Workplace <span className="text-gradient">Habits</span></h2>
         </div>
 
-        <div className="neumorphic-card" style={{ padding: 'var(--space-6)' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+        <div className="glass-card" style={{ padding: 'var(--space-6)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <AnimatePresence>
-              {plans.map((plan) => (
+              {habits.map((habit) => (
                 <motion.div
-                  key={plan.id}
+                  key={habit.id}
                   className="neumorphic-inset"
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-4)' }}
                   layout
@@ -36,30 +36,28 @@ export default function HabitsSection() {
                     <motion.button
                       className="btn"
                       style={{
-                        width: 28, height: 28, padding: 0, borderRadius: '50%',
-                        background: plan.done ? 'var(--primary-500)' : 'var(--bg-base)',
-                        border: plan.done ? 'none' : '2px solid var(--border-strong)',
-                        color: 'white',
-                        boxShadow: plan.done ? 'var(--glow-primary)' : 'var(--shadow-neu-inset)'
+                        width: 24, height: 24, padding: 0, borderRadius: 'var(--radius-sm)',
+                        background: habit.done ? 'var(--primary-600)' : 'var(--bg-base)',
+                        border: habit.done ? 'none' : '1px solid var(--border-strong)',
+                        color: 'white'
                       }}
-                      onClick={() => toggle(plan.id)}
+                      onClick={() => toggle(habit.id)}
                       whileTap={{ scale: 0.9 }}
                     >
-                      {plan.done && <Check size={16} strokeWidth={3} />}
+                      {habit.done && <Check size={14} strokeWidth={3} />}
                     </motion.button>
                     <span style={{ 
-                      fontSize: 'var(--text-lg)', 
-                      fontWeight: 600,
-                      color: plan.done ? 'var(--text-muted)' : 'var(--text-primary)',
-                      textDecoration: plan.done ? 'line-through' : 'none',
-                      transition: 'all 0.3s'
+                      fontSize: 'var(--text-base)', 
+                      fontWeight: 500,
+                      color: habit.done ? 'var(--text-muted)' : 'var(--text-primary)',
+                      textDecoration: habit.done ? 'line-through' : 'none',
                     }}>
-                      {plan.text}
+                      {habit.text}
                     </span>
                   </div>
                   
-                  <div className="badge badge-primary">
-                    <Calendar size={12} style={{ marginRight: 4 }} /> {plan.streak} Day Streak
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>
+                    <Clock size={14} /> {habit.time}
                   </div>
                 </motion.div>
               ))}

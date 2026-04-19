@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Activity, Zap, Menu, X, Bell, User } from 'lucide-react'
+import { Hexagon, Menu, X, Bell } from 'lucide-react'
 
-const navItems = ['Home', 'Dashboard', 'Habits', 'Insights', 'Progress']
+// Minimal Navigation items
+const navItems = ['Assistant', 'Tracker', 'Awareness', 'Daily']
 
 export default function Navbar({ activeSection, setActiveSection, scrolled }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -14,20 +15,21 @@ export default function Navbar({ activeSection, setActiveSection, scrolled }) {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
     >
-      <div className="container nav-inner" style={{ height: '72px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="container" style={{ height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <motion.a
           className="nav-logo"
           href="#"
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', fontSize: 'var(--text-lg)', fontWeight: 800, color: 'var(--text-primary)', textDecoration: 'none' }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <div className="icon-wrap icon-wrap-primary" style={{ width: 36, height: 36, borderRadius: 'var(--radius-md)' }}>
-            <Activity size={20} strokeWidth={2.5} />
+          <div className="icon-wrap icon-wrap-primary" style={{ width: 32, height: 32, borderRadius: 'var(--radius-sm)' }}>
+            <Hexagon size={18} strokeWidth={2.5} />
           </div>
-          Opti<span style={{ color: 'var(--primary-600)' }}>Life</span>
+          OptiLife
         </motion.a>
 
-        <ul className="nav-links" style={{ display: 'flex', gap: 'var(--space-2)' }}>
+        <ul className="nav-links" style={{ display: 'flex', gap: 'var(--space-1)', listStyle: 'none' }}>
           {navItems.map((item) => (
             <li key={item}>
               <button
@@ -40,23 +42,22 @@ export default function Navbar({ activeSection, setActiveSection, scrolled }) {
           ))}
         </ul>
 
-        <div className="nav-actions" style={{ display: 'flex', gap: 'var(--space-3)' }}>
-          <motion.button className="btn btn-secondary btn-sm" style={{ width: 40, height: 40, padding: 0, borderRadius: '50%' }}>
-            <Bell size={18} />
-          </motion.button>
+        <div className="nav-actions" style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
+          <button className="btn btn-ghost btn-sm" style={{ width: 36, height: 36, padding: 0 }}>
+            <Bell size={18} color="var(--text-secondary)" />
+          </button>
           
-          <motion.button className="btn btn-primary btn-sm" style={{ paddingInline: 'var(--space-5)' }}>
-            <User size={16} />
-            <span>Patient Portal</span>
-          </motion.button>
+          <button className="btn btn-primary btn-sm" style={{ paddingInline: 'var(--space-5)' }}>
+            Sign In
+          </button>
 
-          <motion.button
+          <button
             className="btn btn-secondary btn-sm nav-mobile-btn"
-            style={{ width: 40, height: 40, padding: 0 }}
+            style={{ width: 36, height: 36, padding: 0 }}
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </motion.button>
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
       </div>
 
@@ -66,7 +67,7 @@ export default function Navbar({ activeSection, setActiveSection, scrolled }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            style={{ overflow: 'hidden', background: 'var(--bg-surface)', boxShadow: 'var(--shadow-neu)' }}
+            style={{ overflow: 'hidden', background: 'var(--bg-elevated)', borderBottom: '1px solid var(--border-default)' }}
           >
             <div className="container" style={{ paddingBlock: 'var(--space-4)', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
               {navItems.map((item) => (

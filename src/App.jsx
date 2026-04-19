@@ -7,7 +7,6 @@ import DashboardSection from './components/DashboardSection'
 import HabitsSection from './components/HabitsSection'
 import InsightsSection from './components/InsightsSection'
 import AIAssistant from './components/AIAssistant'
-import CTASection from './components/CTASection'
 import Footer from './components/Footer'
 
 const pageVariants = {
@@ -36,13 +35,12 @@ export default function App() {
       style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
     >
       <Navbar activeSection={activeSection} setActiveSection={setActiveSection} scrolled={scrolled} />
-      <main style={{ flex: 1, paddingTop: '68px' }}>
+      <main style={{ flex: 1, paddingTop: '70px' }}>
         <HeroSection setActiveSection={setActiveSection} />
-        <DashboardSection />
-        <HabitsSection />
-        <InsightsSection />
         <AIAssistant />
-        <CTASection />
+        <DashboardSection />
+        <InsightsSection />
+        <HabitsSection />
       </main>
       <Footer />
     </motion.div>

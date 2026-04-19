@@ -1,69 +1,49 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Play, TrendingUp, Users, Shield, Star, ShieldCheck } from 'lucide-react'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight, Bot, Compass, ShieldCheck } from 'lucide-react'
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] }
+    transition: { duration: 0.5, delay: i * 0.1, ease: 'easeOut' }
   })
 }
 
-const statsData = [
-  { value: '2M+', label: 'Active Patients', icon: Users },
-  { value: '99%', label: 'Clinical Accuracy', icon: ShieldCheck },
-  { value: '24/7', label: 'Health Monitoring', icon: TrendingUp },
-  { value: 'HIPAA', label: 'Compliant Security', icon: Shield },
-]
-
 export default function HeroSection({ setActiveSection }) {
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
-
   return (
-    <section ref={containerRef} className="section bg-medical-pattern" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
-      <motion.div className="container" style={{ y, opacity }}>
-        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
-          <motion.div variants={fadeUp} custom={0} initial="hidden" animate="visible">
-            <span className="badge badge-primary" style={{ marginBottom: 'var(--space-6)' }}>
-              <ShieldCheck size={14} /> CERTIFIED TELEMEDICINE APP
-            </span>
-          </motion.div>
+    <section className="section" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', paddingTop: '120px' }}>
+      <div className="container" style={{ textAlign: 'center', maxWidth: 800 }}>
+        
+        <motion.div custom={0} initial="hidden" animate="visible" variants={fadeUp}>
+          <span className="badge" style={{ marginBottom: 'var(--space-6)' }}>
+            <Bot size={12} /> ENTERPRISE WELLNESS AI
+          </span>
+        </motion.div>
 
-          <motion.h1 className="display-xl" variants={fadeUp} custom={1} initial="hidden" animate="visible" style={{ marginBottom: 'var(--space-6)' }}>
-            Digital Healthcare, <br />
-            <span className="text-gradient">Personalized for You</span>
-          </motion.h1>
+        <motion.h1 className="display-xl" custom={1} initial="hidden" animate="visible" variants={fadeUp} style={{ marginBottom: 'var(--space-6)' }}>
+          Workplace Wellness, <br />
+          Simplified.
+        </motion.h1>
 
-          <motion.p variants={fadeUp} custom={2} initial="hidden" animate="visible" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-lg)', marginBottom: 'var(--space-10)', maxWidth: 600, margin: '0 auto var(--space-10)' }}>
-            Monitor vital signs, communicate with certified doctors, and manage your medical records in one secure, intuitive platform.
-          </motion.p>
+        <motion.p custom={2} initial="hidden" animate="visible" variants={fadeUp} style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-lg)', marginBottom: 'var(--space-10)', maxWidth: 600, margin: '0 auto var(--space-8)' }}>
+          Get instant AI answers for HR policies, track office-related health symptoms, and build sustainable habits to thrive at work and in life.
+        </motion.p>
 
-          <motion.div variants={fadeUp} custom={3} initial="hidden" animate="visible" style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', marginBottom: 'var(--space-16)' }}>
-            <button className="btn btn-primary btn-lg" onClick={() => setActiveSection('dashboard')}>
-              Start Free Consultation <ArrowRight size={16} />
-            </button>
-            <button className="btn btn-secondary btn-lg">
-              <Play size={16} /> How it Works
-            </button>
-          </motion.div>
+        <motion.div custom={3} initial="hidden" animate="visible" variants={fadeUp} style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', marginBottom: 'var(--space-16)' }}>
+          <button className="btn btn-primary btn-lg" onClick={() => document.getElementById('assistant').scrollIntoView({ behavior: 'smooth' })}>
+            Ask the AI Assistant <ArrowRight size={18} />
+          </button>
+          <button className="btn btn-secondary btn-lg" onClick={() => setActiveSection('tracker')}>
+            <Compass size={18} /> Symptom Tracker
+          </button>
+        </motion.div>
 
-          <motion.div variants={fadeUp} custom={4} initial="hidden" animate="visible" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-4)' }}>
-            {statsData.map((stat, i) => (
-              <div key={stat.label} className="neumorphic-card" style={{ padding: 'var(--space-5)', textAlign: 'center' }}>
-                <div className="icon-wrap icon-wrap-primary" style={{ width: 48, height: 48, marginBottom: 'var(--space-3)' }}>
-                  <stat.icon size={22} />
-                </div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', fontWeight: 800 }}>{stat.value}</div>
-                <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.div>
+        <motion.div custom={4} initial="hidden" animate="visible" variants={fadeUp} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-6)', color: 'var(--text-muted)', fontSize: 'var(--text-sm)', fontWeight: 500 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}><ShieldCheck size={16} /> Data Completely Private</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}><ShieldCheck size={16} /> 24/7 Availability</div>
+        </motion.div>
+
+      </div>
     </section>
   )
 }
