@@ -2,24 +2,11 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Lightbulb, Send } from 'lucide-react'
 
-const responses = {
-  "hello": "Hello! I'm your OptiLife assistant, here to help you thrive at work. What can I do for you?",
-  "work from home policy": "Our flexible work policy promotes work-life balance. You can work remotely 2-3 days per week, coordinating with your team lead for specific arrangements.",
-  "vacation policy": "We value rest and rejuvenation! Full-time employees receive 20 days of paid vacation annually, accrued monthly. Submit requests through the HR portal at least 2 weeks in advance.",
-  "sick leave": "Your health matters! You're entitled to 10 paid sick days annually. Please notify your manager as soon as possible and submit documentation for absences exceeding 3 days.",
-  "expense report": "For expense reimbursement, submit reports through the finance portal within 30 days of purchase. Ensure all receipts are clearly scanned and categorized correctly.",
-  "benefits": "We offer comprehensive benefits including health, dental, vision insurance, 401(k) matching up to 6%, annual wellness stipend of $500, and mental health resources.",
-  "training budget": "Invest in yourself! Each employee has an annual training budget of $2,000 for professional development. Submit requests through the learning portal.",
-  "performance review": "Growth through feedback: Performance reviews are conducted bi-annually in June and December. Start self-assessment 3 weeks before your scheduled review.",
-  "it support": "For technical support, create a ticket through the helpdesk portal or call ext. 1234 for urgent issues. Our IT team is here to help!",
-  "meeting rooms": "Book meeting spaces through the Office365 calendar. Rooms must be booked at least 1 hour in advance. Virtual meeting options are always available.",
-  "career development": "OptiLife supports your growth! We offer mentorship programs, skill workshops, and career coaching. Schedule a meeting with your manager to discuss your career path.",
-  "wellness programs": "Your well-being is our priority! Access our wellness platform for meditation sessions, fitness classes, and mental health resources. Monthly wellness challenges available!"
-};
+import knowledgeBase from '../chatbotKnowledge.json'
 
 export default function AIAssistant() {
   const [input, setInput] = useState('');
-  const [response, setResponse] = useState('Welcome to OptiLife! How can I assist you today?');
+  const [response, setResponse] = useState('Welcome to OptiLife! How can I assist you with the medical knowledge base today?');
   const [isTyping, setIsTyping] = useState(false);
 
   const getResponse = () => {
@@ -30,10 +17,12 @@ export default function AIAssistant() {
     setResponse(''); // Clear immediately for effect
 
     setTimeout(() => {
-      const match = Object.keys(responses).find(key => query.includes(key));
+      // Find the first document that contains the query
+      const match = knowledgeBase.find(entry => entry.text.toLowerCase().includes(query));
+      
       const aiReply = match 
-        ? responses[match] 
-        : "I don't have specific information about that query. Please reach out to HR or your supervisor for more details, or try asking about our wellness programs, benefits, or career development opportunities!";
+        ? `Found in [${match.id}]:\n\n${match.text}...` 
+        : "I couldn't find any information in the dataset about that query. Please try searching for specific medical terms or diseases (e.g. 'pulmonary embolism', 'chronic pain').";
       
       setResponse(aiReply);
       setIsTyping(false);
