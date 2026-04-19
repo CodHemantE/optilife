@@ -3,10 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Activity } from 'lucide-react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
-import DashboardSection from './components/DashboardSection'
-import HabitsSection from './components/HabitsSection'
-import InsightsSection from './components/InsightsSection'
 import AIAssistant from './components/AIAssistant'
+import InsightsSection from './components/InsightsSection'
+import HabitsSection from './components/HabitsSection'
 import Footer from './components/Footer'
 
 const pageVariants = {
@@ -38,7 +37,6 @@ export default function App() {
       <main style={{ flex: 1, paddingTop: '70px' }}>
         <HeroSection setActiveSection={setActiveSection} />
         <AIAssistant />
-        <DashboardSection />
         <InsightsSection />
         <HabitsSection />
       </main>

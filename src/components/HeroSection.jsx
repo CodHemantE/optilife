@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Bot, Compass, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Bot, ShieldCheck } from 'lucide-react'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -32,9 +32,6 @@ export default function HeroSection({ setActiveSection }) {
         <motion.div custom={3} initial="hidden" animate="visible" variants={fadeUp} style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', marginBottom: 'var(--space-16)' }}>
           <button className="btn btn-primary btn-lg" onClick={() => document.getElementById('assistant').scrollIntoView({ behavior: 'smooth' })}>
             Ask the AI Assistant <ArrowRight size={18} />
-          </button>
-          <button className="btn btn-secondary btn-lg" onClick={() => setActiveSection('tracker')}>
-            <Compass size={18} /> Symptom Tracker
           </button>
         </motion.div>
 

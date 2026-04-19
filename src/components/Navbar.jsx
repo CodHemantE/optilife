@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Hexagon, Menu, X, Bell } from 'lucide-react'
 
 // Minimal Navigation items
-const navItems = ['Assistant', 'Tracker', 'Awareness', 'Daily']
+const navItems = ['Assistant', 'Awareness', 'Daily']
 
 export default function Navbar({ activeSection, setActiveSection, scrolled }) {
   const [menuOpen, setMenuOpen] = useState(false)
